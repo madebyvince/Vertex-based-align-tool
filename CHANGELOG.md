@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2025-12-31
+
+### Added
+- Support for 3-vertex alignment enabling complete 3D orientation matching
+- "Mark Source Vertex 3" and "Mark Target Vertex 3" operators
+- Sequential alignment algorithm: first aligns vertices 1-2, then rotates around 1→2 axis to align vertex 3
+- Third vertex display in UI panel for both source and target objects
+- Automatic position correction after final rotation to ensure perfect alignment
+
+### Changed
+- Updated "Align objects" button to show three modes: "Position Only", "Partial Rotation", or "Full Rotation"
+- Enhanced alignment logic to handle 1, 2, or 3 vertex configurations automatically
+
+### Improved
+- More robust alignment for complex orientations
+- Complete control over all three rotation axes
+- Better handling of edge cases in rotation calculations
+
 ## [3.0.0] - 2025-10-23
 
 ### Added

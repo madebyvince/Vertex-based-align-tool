@@ -11,14 +11,15 @@ A Blender add-on that allows you to align objects using marked vertices with opt
 ## Features
 
 - **Position Alignment**: Align one object to another using a single vertex on each object
-- **Position + Rotation Alignment**: Align both position and rotation using two vertices on each object
-- **Smart Detection**: Single "Align" button automatically detects whether to apply rotation based on marked vertices
+- **Partial Rotation Alignment**: Align position and rotation along one axis using two vertices on each object
+- **Full Rotation Alignment**: Complete 3D orientation alignment using three vertices on each object
+- **Smart Detection**: Single "Align" button automatically detects alignment mode (1, 2, or 3 vertices)
 - **Clear Visual Feedback**: Panel shows all marked vertices for both source and target objects
 - **Easy Workflow**: Simple step-by-step process with clear instructions
 
 ## Installation
 
-1. Download the latest release: [`vertex_based_align.py`](vertex_based_align.py)
+1. Download the latest release: [`vertex_based_align.py`](https://github.com/madebyvince/Vertex-based-align-tool/releases/latest)
 2. Open Blender
 3. Go to **Edit > Preferences > Add-ons**
 4. Click **Install** and select the downloaded `.py` file
@@ -42,9 +43,9 @@ Use this when you only want to move an object to match a vertex position.
 
 The source object will move so that its marked vertex matches the position of the target vertex.
 
-### Position + Rotation Alignment
+### Position + Partial Rotation Alignment
 
-Use this when you want to align both position and orientation using two vertices on each object.
+Use this when you want to align both position and orientation along one axis using two vertices on each object.
 
 1. Select the **source object**
 2. Enter **Edit Mode**
@@ -62,6 +63,29 @@ Use this when you want to align both position and orientation using two vertices
 The source object will be rotated and moved so that:
 - Source Vertex 1 aligns with Target Vertex 1
 - The vector from Source Vertex 1→2 aligns with the vector from Target Vertex 1→2
+
+### Position + Full Rotation Alignment
+
+Use this when you need complete 3D orientation alignment using three vertices on each object.
+
+1. Select the **source object**
+2. Enter **Edit Mode**
+3. Select the first vertex (origin point) and click **Mark Source Vertex 1**
+4. Select the second vertex (defines primary axis) and click **Mark Source Vertex 2**
+5. Select the third vertex (defines plane/orientation) and click **Mark Source Vertex 3**
+6. Select the **target object**
+7. Enter **Edit Mode**
+8. Select the first vertex and click **Mark Target Vertex 1**
+9. Select the second vertex and click **Mark Target Vertex 2**
+10. Select the third vertex and click **Mark Target Vertex 3**
+11. Click **Align objects**
+
+The source object will be fully aligned so that:
+- Source Vertex 1 aligns with Target Vertex 1
+- The vector from Source Vertex 1→2 aligns with Target Vertex 1→2
+- The plane defined by Source Vertices 1, 2, 3 aligns with the plane defined by Target Vertices 1, 2, 3
+
+This provides complete 3D orientation matching, regardless of the initial orientations of the objects.
 
 ## Interface
 
@@ -89,10 +113,11 @@ The add-on adds a **Vertex Based Align Tool** panel in the 3D Viewport sidebar (
 
 ## Tips
 
-- The "Align objects" button text changes to show whether it will apply rotation or position only
-- You can mark Vertex 2 on only one object pair - the add-on will automatically do position-only alignment
+- The "Align objects" button text changes to show the alignment mode: "Position Only", "Partial Rotation", or "Full Rotation"
+- You can mark 2 or 3 vertices depending on your needs - the add-on automatically adapts
+- For full rotation alignment, ensure the three vertices are not collinear (they should define a plane)
 - Use the "Clear All" button to quickly reset all marked vertices
-- Vertices are marked by index, so they remain valid even if you modify the mesh
+- Vertices are marked by index, so they remain valid even if you modify the mesh (unless you delete vertices)
 
 ## Known Limitations
 
@@ -113,6 +138,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 If you encounter any issues or have suggestions for improvements, please open an issue on GitHub.
 
 ## Changelog
+
+### Version 4.0.0
+- Added support for 3-vertex alignment for complete 3D orientation matching
+- Implemented sequential alignment algorithm (2-vertex alignment + rotation around axis)
+- Added "Mark Vertex 3" buttons for source and target objects
+- Enhanced UI to display all three vertices
+- Updated button text to show "Partial Rotation" vs "Full Rotation"
 
 ### Version 3.0.0
 - Added explicit target vertex marking
